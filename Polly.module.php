@@ -63,6 +63,14 @@ class Polly extends CMSModule
 		parent::__construct();	
 	}
 	
+	public function __call($method, $args = array())
+	{
+		array_unshift($args, '');
+		$args[0] = &$this;
+		
+		return call_user_func_array(array($this->GetName() .'\\ModuleExtensions', $method), $args);	
+	}
+	
 	#---------------------
 	# Internal autoloader
 	#---------------------	
@@ -78,15 +86,6 @@ class Polly extends CMSModule
 			require_once($fn);
 		}	
 	}
-	
-	#---------------------
-	# Help methods
-	#---------------------		
-	
-	final protected function CallFromNamespace($class, $method, $args = array())
-	{
-		return call_user_func_array(array($this->GetName() .'\\'. $class, $method), $args);
-	}	
 	
 	#---------------------
 	# Module API methods
@@ -208,7 +207,7 @@ class Polly extends CMSModule
 		$smarty = cmsms()->GetSmarty();
 		
 		$smarty->assign('module_path', $this->GetModuleURLPath());
-		$smarty->assign('idt_module_help', $this->CallFromNamespace('IDT', 'getModuleHelp'));
+		$smarty->assign('idt_module_help', $this->IDTHelp());
 
 		$smarty->assign('mod', $this);
 
@@ -225,16 +224,7 @@ EOT;
 
 	public function AdminStyle()
 	{
-		$config = cmsms()->GetConfig();
-		$smarty = cmsms()->GetSmarty();
-		
-		$themeObject = cms_utils::get_theme_object();
-		$theme_url = $config['root_url'].'/'.$config['admin_dir']."/themes/".$themeObject->themeName;
-		$smarty->assignByRef('themeObject', $themeObject);
-		$smarty->assign('theme_url', $theme_url);
-		$smarty->assign('module_url', $this->GetModuleURLPath());
-		
-		return $this->CallFromNamespace('module_utils', 'AdminStyle', array(&$this));
+		return $this->addCSS();
 	}
 
 	public function DoAction($name,$id,$params,$returnid='')

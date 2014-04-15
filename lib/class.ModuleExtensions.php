@@ -39,7 +39,7 @@ namespace Polly;
  * @author Tapio Löytty
  * @version 1.0
  */
-class module_utils
+class ModuleExtensions
 {
 	#---------------------
 	# Magic methods
@@ -48,27 +48,28 @@ class module_utils
 	private function __construct() {}
 	
 	#---------------------
-	# Help methods
+	# IDT
 	#---------------------		
 	
-	final static public function init_var($string, &$params, $default = '') 
+	static public function IDTHelp(&$mod)
 	{
-		$var = $default;
-		if(isset($params[$string])) {
-
-			$var = $params[$string];
-		}
-		
-		return $var;
+		return IDT::getModuleHelp();
 	}
 	
 	#---------------------
 	# Module methods
 	#---------------------		
 	
-	final static public function AdminStyle(&$mod)
+	static public function addCSS(&$mod)
 	{
+		$config = cmsms()->GetConfig();
 		$smarty = cmsms()->GetSmarty();
+		
+		$themeObject = \cms_utils::get_theme_object();
+		$theme_url = $config['root_url'].'/'.$config['admin_dir']."/themes/".$themeObject->themeName;
+		$smarty->assignByRef('themeObject', $themeObject);
+		$smarty->assign('theme_url', $theme_url);
+		$smarty->assign('module_url', $mod->GetModuleURLPath());
 		
 		$left_delim = $smarty->left_delimiter;
 		$right_delim = $smarty->right_delimiter;
