@@ -77,7 +77,16 @@ class Polly extends CMSModule
 		
 			require_once($fn);
 		}	
-	}		
+	}
+	
+	#---------------------
+	# Help methods
+	#---------------------		
+	
+	protected static function CallFromNamespace($class, $method, $args = array())
+	{
+		return call_user_func_array(array(__CLASS__ .'\\'. $class, $method), $args);
+	}	
 	
 	#---------------------
 	# Module API methods
@@ -199,7 +208,7 @@ class Polly extends CMSModule
 		$smarty = cmsms()->GetSmarty();
 		
 		$smarty->assign('module_path', $this->GetModuleURLPath());
-		$smarty->assign('idt_module_help', Polly\IDT::getModuleHelp());
+		$smarty->assign('idt_module_help', self::CallFromNamespace('IDT', 'getModuleHelp'));
 
 		$smarty->assign('mod', $this);
 
@@ -209,8 +218,6 @@ class Polly extends CMSModule
 	public function GetHeaderHTML()
 	{
 		return <<<EOT
-<link type="text/css" rel="stylesheet" href="{$this->GetModuleURLPath()}/lib/css/jqueryui-editable.css" />
-<link type="text/css" rel="stylesheet" href="{$this->GetModuleURLPath()}/lib/css/polly-style.css" />
 <script type="text/javascript" src="{$this->GetModuleURLPath()}/lib/js/jqueryui-editable.min.js"></script>
 <script type="text/javascript" src="{$this->GetModuleURLPath()}/lib/js/functions.js"></script>
 EOT;
@@ -218,16 +225,16 @@ EOT;
 
 	public function AdminStyle()
 	{
-		$smarty = cmsms()->GetSmarty();
 		$config = cmsms()->GetConfig();
-	
+		$smarty = cmsms()->GetSmarty();
+		
 		$themeObject = cms_utils::get_theme_object();
 		$theme_url = $config['root_url'].'/'.$config['admin_dir']."/themes/".$themeObject->themeName;
-		
 		$smarty->assignByRef('themeObject', $themeObject);
 		$smarty->assign('theme_url', $theme_url);
+		$smarty->assign('module_url', $this->GetModuleURLPath());
 		
-		return $this->ProcessTemplate('stylesheet.tpl');
+		return self::CallFromNamespace('module_utils', 'AdminStyle', array(&$this));
 	}
 
 	public function DoAction($name,$id,$params,$returnid='')

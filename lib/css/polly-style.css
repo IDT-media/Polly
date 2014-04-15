@@ -108,6 +108,23 @@ ul#polly-options {
 	margin-bottom: 4px;
 }
 
+.polly.polly-button a {
+
+	position: relative;
+	padding-left: 20px;
+}
+
+.polly.polly-button.add a:before {
+
+	display: block;
+	position: absolute;
+	
+	top: 0;
+	left: 0;
+
+	content: url('[[$theme_url]]/images/icons/system/newobject.gif');
+}
+
 .visuallyhidden {
 	border: 0;
 	clip: rect(0, 0, 0, 0);
