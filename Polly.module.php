@@ -67,7 +67,7 @@ class Polly extends CMSModule
 	# Internal autoloader
 	#---------------------	
 
-	private final function _autoloader($classname)
+	final private function _autoloader($classname)
 	{	
 		$parts = explode('\\', $classname);
 		$classname = end($parts);
@@ -83,9 +83,9 @@ class Polly extends CMSModule
 	# Help methods
 	#---------------------		
 	
-	protected static function CallFromNamespace($class, $method, $args = array())
+	final protected function CallFromNamespace($class, $method, $args = array())
 	{
-		return call_user_func_array(array(__CLASS__ .'\\'. $class, $method), $args);
+		return call_user_func_array(array($this->GetName() .'\\'. $class, $method), $args);
 	}	
 	
 	#---------------------
@@ -208,7 +208,7 @@ class Polly extends CMSModule
 		$smarty = cmsms()->GetSmarty();
 		
 		$smarty->assign('module_path', $this->GetModuleURLPath());
-		$smarty->assign('idt_module_help', self::CallFromNamespace('IDT', 'getModuleHelp'));
+		$smarty->assign('idt_module_help', $this->CallFromNamespace('IDT', 'getModuleHelp'));
 
 		$smarty->assign('mod', $this);
 
@@ -234,7 +234,7 @@ EOT;
 		$smarty->assign('theme_url', $theme_url);
 		$smarty->assign('module_url', $this->GetModuleURLPath());
 		
-		return self::CallFromNamespace('module_utils', 'AdminStyle', array(&$this));
+		return $this->CallFromNamespace('module_utils', 'AdminStyle', array(&$this));
 	}
 
 	public function DoAction($name,$id,$params,$returnid='')
