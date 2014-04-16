@@ -13,6 +13,7 @@ $lang['insert_question'] = 'Insert option';
 
 # Text
 $lang['module_options'] = 'Module Options';
+$lang['statistic_title'] = 'Vote statstics for %s';
 
 # Options
 $lang['prompt_adminsection'] = 'Module Admin Section';
@@ -35,6 +36,7 @@ $lang['basic'] = 'Basic';
 $lang['advanced'] = 'Advanced';
 $lang['options'] = 'Options';
 $lang['main'] = 'Main';
+$lang['statistics'] = 'Statistics';
 $lang['poll'] = 'Poll';
 $lang['questions'] = 'Options';
 $lang['answers'] = 'Answers';

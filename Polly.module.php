@@ -217,6 +217,10 @@ class Polly extends CMSModule
 	public function GetHeaderHTML()
 	{
 		return <<<EOT
+
+<script type="text/javascript">
+	var polly_module_path = '{$this->GetModuleURLPath()}';
+</script>
 <script type="text/javascript" src="{$this->GetModuleURLPath()}/lib/js/jqueryui-editable.min.js"></script>
 <script type="text/javascript" src="{$this->GetModuleURLPath()}/lib/js/functions.js"></script>
 EOT;

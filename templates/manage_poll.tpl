@@ -6,7 +6,7 @@
 {$mod->StartTabHeaders()}
 
 	{$mod->SetTabHeader('main', $mod->Lang('main'))}
-	{*$mod->SetTabHeader('options', $mod->Lang('options'))*}
+	{$mod->SetTabHeader('statistics', $mod->Lang('statistics'))}
 
 {$mod->EndTabHeaders()}
 {$mod->StartTabContent()}
@@ -42,19 +42,25 @@
 		
 	{$mod->EndTab()}
 
-	{*$mod->StartTab('options')}
+	{$mod->StartTab('statistics')}
 	
-		<fieldset>
-		<legend>{$mod->Lang('sending_options')}</legend>
+		<h3>{$mod->Lang('statistic_title', $item->name)}</h3>
 			<div class="pageoverflow">
-				<p class="pagetext">{$mod->Lang('mode')}:</p>
-				<div class="pageinput">
-
+				<script>
+					var votes = [];
+					
+					{foreach $item->options as $option}{$votes = mt_rand(0, 500)}
+					
+						vote = ['{$option->data|escape:'quotes'}', {$votes}];
+						votes.push(vote);
+					{/foreach}
+					
+				</script>
+				<div class="polly-vote-results-container">
+					<div class="polly-vote-results" id="polly-pie-chart"></div>
 				</div>
 			</div>
-		</fieldset>
-	
-	{$mod->EndTab()*}
+	{$mod->EndTab()}
 	
 {$mod->EndTabContent()}
 

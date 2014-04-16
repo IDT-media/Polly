@@ -90,7 +90,7 @@ ul#polly-options {
 	float: left;
 	border: none;
 	display: block;
-	width: 92%;
+	width: 90%;
 	cursor: text;
 }
 
@@ -101,6 +101,23 @@ ul#polly-options {
 	height: 35px;
 	line-height: 35px;
 	padding: 0 20px 0 10px;
+}
+
+.polly-vote-results-container {
+	position: relative;
+	padding-top: 50%; 
+	height: 0
+	margin: 20px 0;
+	border-radius: 4px;
+	border: 1px solid #ddd;
+}
+
+.polly-vote-results {
+	position: absolute;
+	left: 0;
+	top: 0;
+	bottom: 0;
+	right: 0;
 }
 
 .editable-buttons button.ui-button {
