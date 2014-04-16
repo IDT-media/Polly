@@ -107,9 +107,9 @@ class PollyOperations
 				die('FATAL SQL ERROR: ' . $db->ErrorMsg() . '<br/>QUERY: ' . $db->sql);			
 		}		
 		
-		// Handle deleted items
-		$delete = "DELETE FROM ". POLLY_DB_TABLE_OPTIONS ." WHERE id NOT IN (". implode(',', $id_list) .")";
-		$db->Execute($delete);
+		// Handle options delete
+		$delete = "DELETE FROM ". POLLY_DB_TABLE_OPTIONS ." WHERE polly_id = ? AND id NOT IN (". implode(',', $id_list) .")";
+		$db->Execute($delete, array($obj->id));
 
 		return true;
 	}
