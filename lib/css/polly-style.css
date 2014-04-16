@@ -36,7 +36,7 @@ ul#polly-options {
 	height: 35px;
 	line-height: 35px;
 	border-top: 1px solid #eee;
-	padding: 0 20px 0 10px;
+	padding: 0 40px 0 10px;
 }
 
 #polly-options > li:first-child {
@@ -81,7 +81,7 @@ ul#polly-options {
 	position: relative;
 	display: inline-block;
 	float: right;
-	right: -10px;
+	right: -30px;
 	cursor: pointer;
 }
 
@@ -90,7 +90,7 @@ ul#polly-options {
 	float: left;
 	border: none;
 	display: block;
-	width: 98%;
+	width: 92%;
 	cursor: text;
 }
 
@@ -109,19 +109,15 @@ ul#polly-options {
 }
 
 .polly.polly-button a {
-
 	position: relative;
 	padding-left: 20px;
 }
 
 .polly.polly-button.add a:before {
-
 	display: block;
 	position: absolute;
-	
 	top: 0;
 	left: 0;
-
 	content: url('[[$theme_url]]/images/icons/system/newobject.gif');
 }
 
