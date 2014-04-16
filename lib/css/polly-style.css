@@ -157,3 +157,20 @@ ul#polly-options {
 .cf:after, .clear { 
 	clear: both; 
 }
+
+@media screen and (max-width: 420px) {
+	.polly-editable {
+		width: 85%;
+	}
+	
+	#polly-options > li {
+		height: auto;
+		line-height: 1.8;
+		padding-top: 8px;
+		padding-bottom: 3px;
+	}
+	
+	#polly-options .polly-row .editable-inline {
+		width: 60%;
+	}
+}
