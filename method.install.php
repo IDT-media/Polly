@@ -60,7 +60,7 @@ $flds = "
 $sqlarray = $dict->CreateTableSQL(POLLY_DB_TABLE_POLLY, $flds, $taboptarray);
 $dict->ExecuteSQLArray($sqlarray);
 
-# Event table
+# Options table
 $flds = "
 	id I KEY AUTO,
 	polly_id I,
@@ -70,13 +70,13 @@ $flds = "
 	create_date DT,
 	modified_date DT	
 ";
-$sqlarray = $dict->CreateTableSQL(POLLY_DB_TABLE_QUESTIONS, $flds, $taboptarray);
+$sqlarray = $dict->CreateTableSQL(POLLY_DB_TABLE_OPTIONS, $flds, $taboptarray);
 $dict->ExecuteSQLArray($sqlarray);
 
-# Attributes table
+# Answers table
 $flds = "
 	hash C(255) KEY,
-	question_id I KEY,
+	option_id I KEY,
 	ip C(255),
 	user_info C(255),
 	timestamp DT	

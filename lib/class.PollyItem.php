@@ -49,7 +49,7 @@ class PollyItem
 	public $alias;
 	public $created;
 	public $modified;
-	public $questions;
+	public $options;
 
 	#---------------------
 	# Magic methods
@@ -62,7 +62,7 @@ class PollyItem
 		$this->alias = null;
 		$this->created = time();
 		$this->modified = time();			
-		$this->questions = array();
+		$this->options = array();
 	}
 
 } // end of class

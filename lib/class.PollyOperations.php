@@ -50,7 +50,7 @@ class PollyOperations
 	# Database methods
 	#---------------------	
 	
-	static final public function Save(&$obj)
+	static final public function Save(PollyItem &$obj)
 	{
 		$db = cmsms()->GetDb();
 	
@@ -86,19 +86,30 @@ class PollyOperations
 			$obj->id = $db->Insert_ID();
 		}
 		
-		// Question routines
-		$insert = "INSERT INTO ".POLLY_DB_TABLE_QUESTIONS." (type, data, create_date, modified_date, polly_id) VALUES (?,?,NOW(),NOW(),?)";
-		$update = "UPDATE ".POLLY_DB_TABLE_QUESTIONS." SET type = ?, data = ?, modified_date = NOW(), polly_id = ? WHERE id = ?";
-		foreach($obj->questions as $question) {
+		// Option routines
+		$insert = "INSERT INTO ".POLLY_DB_TABLE_OPTIONS." (type, data, position,create_date, modified_date, polly_id) VALUES (?,?,?,NOW(),NOW(),?)";
+		$update = "UPDATE ".POLLY_DB_TABLE_OPTIONS." SET type = ?, data = ?, position = ?, modified_date = NOW(), polly_id = ? WHERE id = ?";
 		
-			if($question->id > 0)
-				$dbresult = $db->Execute($update, array($question->type, $question->data, $obj->id, $question->id,));
-			else
-				$dbresult = $db->Execute($insert, array($question->type, $question->data, $obj->id));
-			
+		$id_list = array();		
+		foreach($obj->options as $option) {
+		
+			if($option->id > 0) {
+				$dbresult = $db->Execute($update, array($option->type, $option->data, $option->position, $obj->id, $option->id));
+			}
+			else {
+				$dbresult = $db->Execute($insert, array($option->type, $option->data, $option->position, $obj->id));
+				$option->id = $db->Insert_ID();
+			}
+		
+			$id_list[] = $option->id;
+		
 			if (!$dbresult) 
 				die('FATAL SQL ERROR: ' . $db->ErrorMsg() . '<br/>QUERY: ' . $db->sql);			
 		}		
+		
+		// Handle deleted items
+		$delete = "DELETE FROM ". POLLY_DB_TABLE_OPTIONS ." WHERE id NOT IN (". implode(',', $id_list) .")";
+		$db->Execute($delete);
 
 		return true;
 	}
@@ -111,21 +122,21 @@ class PollyOperations
 		$query = "DELETE FROM ".POLLY_DB_TABLE_POLLY." WHERE id = ?";
 		$db->Execute($query, array($id));
 
-		$query = "SELECT id FROM ".POLLY_DB_TABLE_QUESTIONS." WHERE polly_id = ?";
-		$question_id = $db->GetCol($query, array($id));			
+		$query = "SELECT id FROM ".POLLY_DB_TABLE_OPTIONS." WHERE polly_id = ?";
+		$option_id = $db->GetCol($query, array($id));			
 		
 		// Delete from events
-		$query = "DELETE FROM ".POLLY_DB_TABLE_QUESTIONS." WHERE polly_id = ?";	
+		$query = "DELETE FROM ".POLLY_DB_TABLE_OPTIONS." WHERE polly_id = ?";	
 		$db->Execute($query, array($id));
 		
 		// Delete from attributes
-		$query = "DELETE FROM ".POLLY_DB_TABLE_ANSWERS." WHERE question_id IN (". implode(',', $question_id) .")";	
+		$query = "DELETE FROM ".POLLY_DB_TABLE_ANSWERS." WHERE option_id IN (". implode(',', $option_id) .")";	
 		$db->Execute($query);
 									
 		return true;
 	}
 	
-	static final public function Load(&$obj, $id, $full = true)
+	static final public function Load(PollyItem &$obj, $id, $full = true)
 	{
 		$db = cmsms()->GetDb();
 
@@ -144,18 +155,21 @@ class PollyOperations
 			if($full) {
 			
 				// Question routines
-				$query = 'SELECT * FROM '.POLLY_DB_TABLE_QUESTIONS.' WHERE polly_id = ?';
+				$query = 'SELECT * FROM '.POLLY_DB_TABLE_OPTIONS.' WHERE polly_id = ? ORDER BY position ASC';
 				$dbr = $db->Execute($query, array($obj->id));
 				
 				while($dbr && !$dbr->EOF) {
 				
-					$question = new PollyQuestion;
+					$option = new PollyOption;
 					
-					$question->id 		= $dbr->fields['id'];
-					$question->type 	= $dbr->fields['type'];
-					$question->data 	= $dbr->fields['data'];
+					$option->id 		= $dbr->fields['id'];
+					$option->type 		= $dbr->fields['type'];
+					$option->data 		= $dbr->fields['data'];
+					$option->position 	= $dbr->fields['position'];
+					$option->created 	= $dbr->fields['create_date'];
+					$option->modified 	= $dbr->fields['modified_date'];			
 					
-					$obj->questions[] = $question;
+					$obj->options[] = $option;
 				
 					$dbr->MoveNext();
 				}		

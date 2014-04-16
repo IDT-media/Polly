@@ -49,7 +49,7 @@ $dict = NewDataDictionary($db);
 $sqlarray = $dict->DropTableSQL(POLLY_DB_TABLE_POLLY);
 $dict->ExecuteSQLArray($sqlarray);
 
-$sqlarray = $dict->DropTableSQL(POLLY_DB_TABLE_QUESTIONS);
+$sqlarray = $dict->DropTableSQL(POLLY_DB_TABLE_OPTIONS);
 $dict->ExecuteSQLArray($sqlarray);
 
 $sqlarray = $dict->DropTableSQL(POLLY_DB_TABLE_ANSWERS);

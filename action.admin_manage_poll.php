@@ -51,8 +51,7 @@ if(isset($params['cancel'])) {
 
 $item 					= (int)polly_utils::init_var('item', $params, null);
 $title 					= (string)polly_utils::init_var('title', $params, '');
-$questions 				= (array)polly_utils::init_var('questions', $params, array());
-$question_ids	 		= (array)polly_utils::init_var('question_ids', $params, array());
+$options 				= (string)polly_utils::init_var('options', $params, '');
 
 #---------------------
 # Init object
@@ -60,6 +59,8 @@ $question_ids	 		= (array)polly_utils::init_var('question_ids', $params, array()
 
 $obj = new PollyItem;
 PollyOperations::Load($obj, $item);
+
+//print_r($obj->options);
 
 #---------------------
 # Submit or Apply
@@ -76,34 +77,20 @@ if(isset($params['submit']) || isset($params['apply'])) {
 	
 		// Fill static
 		$obj->name 			= $title;
+		$obj->options		= array(); // <- Reset, might be dangerous, check this.
 		
-		// Fill questions
-		foreach($questions as $form_question) {
+		//print_r(json_decode(urldecode($options)));die;
+		$options_array = json_decode(urldecode($options));
+		foreach($options_array as $option_raw) {
 		
-			// Update question
-			foreach($obj->questions as $question) {
+			$option = new PollyOption;
 			
-				foreach($question_ids as $qid) {
-					
-					if($question->id == $qid) {
-					
-						$question->data = $form_question;
-						//unset($qid);
-						continue 3;					
-					}
-				}
-			}
+			$option->id 		= (int)$option_raw->id;
+			$option->data 		= (string)$option_raw->data;
+			$option->position 	= (int)$option_raw->position;
 			
-			// Insert question
-			$question = new PollyQuestion;
-			
-			$question->data 	= $form_question;		
-		
-			$obj->questions[] = $question;
+			$obj->options[] = $option;
 		}
-		
-		//print_r($obj);
-		//die;
 		
 		// Save object
 		PollyOperations::Save($obj);

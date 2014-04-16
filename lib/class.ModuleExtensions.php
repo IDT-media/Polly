@@ -1,18 +1,26 @@
 <?php
 #-------------------------------------------------------------------------
-# Module: Mail Plate
+# Module: Polly
 # Version: 1.0
 #-------------------------------------------------------------------------
 #
 # Copyright:
 #
-# Tapio Löytty
-# Web: www.orange-media.fi
-# Email: tapsa@orange-media.fi
+# IDT Media - Goran Ilic & Tapio Löytty
+# Web: www.idt-media.com
+# Email: hi@idt-media.com
 #
-#-------------------------------------------------------------------------
+#
+# Authors:
+#
+# Goran Ilic, <ja@ich-mach-das.at>
+# Web: www.ich-mach-das.at
+# 
+# Tapio Löytty, <tapsa@orange-media.fi>
+# Web: www.orange-media.fi
 #
 # License:
+#-------------------------------------------------------------------------
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -57,7 +65,7 @@ class ModuleExtensions
 	}
 	
 	#---------------------
-	# Module methods
+	# Assets methods
 	#---------------------		
 	
 	static public function addCSS(&$mod)

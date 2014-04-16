@@ -31,7 +31,7 @@
 				<div class="pageinput" id="polly-options-container">
 					<ul id="polly-options" data-polly-lang='{ldelim}"sort_drag":"{$mod->Lang('sort_drag')}","insert_question":"{$mod->Lang('insert_question')}","delete":"{$mod->Lang('delete')}"{rdelim}' data-polly-actionid='{$actionid}'>
 					</ul>
-					<input type="hidden" id="polly-data-values" name="{$actionid}questions" value='{$item->questions|json_encode|escape:'htmlall'}' />
+					<input type="hidden" id="polly-data-values" name="{$actionid}options" value='{$item->options|json_encode|escape:'htmlall'}' />
 				</div>
 				<div class="pageinput polly-add-new">
 					<button id="polly-add-new">{$mod->Lang('add_question')}</button>

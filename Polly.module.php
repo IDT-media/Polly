@@ -43,7 +43,7 @@
 *****************************************************************/
 
 define('POLLY_DB_TABLE_POLLY', cms_db_prefix() . 'module_polly');
-define('POLLY_DB_TABLE_QUESTIONS', cms_db_prefix() . 'module_polly_questions');
+define('POLLY_DB_TABLE_OPTIONS', cms_db_prefix() . 'module_polly_options');
 define('POLLY_DB_TABLE_ANSWERS', cms_db_prefix() . 'module_polly_answers');	
 
 /*****************************************************************
@@ -148,7 +148,7 @@ class Polly extends CMSModule
 
 	public function VisibleToAdminUser()
 	{
-		return $this->CheckPermission($this->GetName() . '_manage_notifications');
+		return $this->CheckPermission($this->GetName() . '_manage_polly');
 	}
 
 	public function InstallPostMessage()
