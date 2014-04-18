@@ -72,7 +72,7 @@ foreach ($templates as $template) {
     $items[$tpl_type][] = $onerow;
 	
 	if(!isset($addlinks[$tpl_type]))
-		$addlinks[$tpl_type] = $this->CreateLink($id, 'admin_manage_template', $returnid, $this->Lang('sub_add', $this->Lang($tpl_type . '_template')), array('type' => $tpl_type));
+		$addlinks[$tpl_type] = $this->CreateLink($id, 'admin_manage_template', $returnid, $this->Lang('add') .' '. $this->Lang($tpl_type) .' '. $this->Lang('template'), array('type' => $tpl_type));
 }
 
 ksort($items);

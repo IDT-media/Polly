@@ -141,7 +141,7 @@ if (!empty($errors))
 # Smarty processing
 #---------------------   
 
-$smarty->assign('title', isset($params['name']) ? $this->Lang('edit') : $this->Lang('add', $this->Lang($tpl_type.'_template')));
+$smarty->assign('title', isset($params['name']) ? $this->Lang('edit') : $this->Lang('add'));
 $smarty->assign('startform', $this->CreateFormStart ($id, $name, $returnid, 'post', 'multipart/form-data', false, '', $params));
 $smarty->assign('endform', $this->CreateFormEnd());
 $smarty->assign('input_template', $this->CreateSyntaxArea($id, $tpl_content, 'template_text'));

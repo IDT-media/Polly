@@ -1,8 +1,7 @@
 ﻿{foreach from=$items key=section item=templates}
 
 	<fieldset>
-		{capture assign='section_lang'}{$section}_templates{/capture}
-		<legend>{$mod->Lang($section_lang)}</legend>
+		<legend>{$mod->Lang($section)} {$mod->Lang('templates')}</legend>
 
 		{if count($templates) > 0}
 		<table cellspacing="0" class="pagetable">
@@ -27,7 +26,9 @@
 		</table>
 		{/if}
 
-		<div class="pageoptions">{$addlinks.$section}</div>
+		<div class="pageoptions">
+			<span class="polly polly-button add">{$addlinks.$section}</span>
+		</div>		
 	</fieldset>	
 	
 {/foreach}

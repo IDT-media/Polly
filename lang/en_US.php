@@ -29,6 +29,7 @@ $lang['tag'] = 'Tag';
 $lang['subject'] = 'Subject';
 $lang['status'] = 'Status';
 $lang['delete'] = 'Delete';
+$lang['add'] = 'Add';
 $lang['edit'] = 'Edit';
 $lang['back'] = 'Back';
 $lang['events'] = 'Events';
@@ -40,24 +41,23 @@ $lang['statistics'] = 'Statistics';
 $lang['poll'] = 'Poll';
 $lang['questions'] = 'Options';
 $lang['answers'] = 'Answers';
+$lang['templates'] = 'Templates';
+$lang['template'] = 'Template';
+$lang['form'] = 'Form';
 
 # Sub sequental words
 $lang['sub_add'] = 'Add %s';
 $lang['sub_edit'] = 'Edit %s';
 
 # Messages
-$lang['message_itemdeleted'] = 'Notification deleted';
-$lang['message_itemsaved'] = 'Notification was successfully saved.';
 $lang['message_changessaved'] = 'Your changes have been successfully saved.';
 
 #Error messages
-$lang['error_fieldempty'] = 'Field %s is empty';
-$lang['error_sendfailed'] = 'Sending notification failed: %s';
-$lang['error_parse_error'] = 'There is parse error with your PHP code';
+$lang['error_empty'] = 'Field %s is empty';
 
 # Params
-$lang['help_param_notification'] = 'Define notification ID you want to trigger.';
-$lang['help_param_var_'] = 'Define anonymous params you want to send to this notification. Can be used in notification templates via &dollar;params variable.';
+#$lang['help_param_notification'] = 'Define notification ID you want to trigger.';
+#$lang['help_param_var_'] = 'Define anonymous params you want to send to this notification. Can be used in notification templates via &dollar;params variable.';
 
 # Help
 $lang['help_general_title'] = 'General';

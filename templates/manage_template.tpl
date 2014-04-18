@@ -12,12 +12,12 @@
 	{$startform}
 
 		<div class="pageoverflow">
-    		<p class="pagetext">* {$mod->Lang('template_name')}:</p>
+    		<p class="pagetext">* {$mod->Lang('template')} {$mod->Lang('name')|strtolower}:</p>
     		<p class="pageinput">{$input_name}</p>
 		</div>
 		
 		<div class="pageoverflow">
-    		<p class="pagetext">{$mod->Lang('default_templates')}:</p>
+    		<p class="pagetext">{'default'|lang} {$mod->Lang('templates')|strtolower}:</p>
     		<p class="pageinput tpl_list">{$input_tpl_list}</p>
 		</div>
 
@@ -30,7 +30,7 @@
 			<p class="pagetext">&nbsp;</p>
 			<p class="pageinput">
 				<input name="{$actionid}submit" class="polly-submit" value="{lang('submit')}" type="submit" />
-				<button name="{$actionid}operation" class="polly-cancel" value="cancel" type="submit">{lang('cancel')}</button>
+				<button name="{$actionid}operation" class="mod-button polly-cancel" data-ui-icon='ui-icon-circle-close' value="cancel" type="submit">{lang('cancel')}</button>
 			</p>	
 		</div>
 
