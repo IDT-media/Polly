@@ -40,6 +40,8 @@
 
 if (!is_object(cmsms())) exit;
  
+$admintheme = cmsms()->get_variable('admintheme'); 
+ 
 #---------------------
 # Tab headers
 #--------------------- 
@@ -48,6 +50,7 @@ echo $this->StartTabHeaders();
 
 echo $this->SetTabHeader('main',$this->Lang('main'));
 echo $this->SetTabHeader('options',$this->Lang('options'));
+echo $this->SetTabHeader('templates',$this->Lang('templates'));
 
 echo $this->EndTabHeaders();
 
@@ -63,6 +66,10 @@ echo $this->EndTab();
 
 echo $this->StartTab('options', $params);   
 include(dirname(__FILE__).'/tabcontent.'.$name.'_options.php'); 
+echo $this->EndTab();
+
+echo $this->StartTab('templates', $params);   
+include(dirname(__FILE__).'/tabcontent.'.$name.'_templates.php'); 
 echo $this->EndTab();
 
 echo $this->EndTabContent();

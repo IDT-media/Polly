@@ -49,8 +49,8 @@ $items = $this->GetItems(false);
 foreach($items as $item) {
 
 	$item->name = $this->CreateLink($id, 'admin_manage_poll', $returnid, $item->name, array('item'=>$item->id));
-	$item->editlink = $this->CreateLink($id, 'admin_manage_poll', $returnid, cmsms()->get_variable('admintheme')->DisplayImage('icons/system/edit.gif', $this->Lang('edit'),'','','systemicon'), array('item'=>$item->id));
-	$item->deletelink = $this->CreateLink($id, 'admin_delete_poll', $returnid, cmsms()->get_variable('admintheme')->DisplayImage('icons/system/delete.gif', $this->Lang('delete'),'','','systemicon'), array('item'=>$item->id), $this->Lang('are_you_sure'));	
+	$item->editlink = $this->CreateLink($id, 'admin_manage_poll', $returnid, $admintheme->DisplayImage('icons/system/edit.gif', $this->Lang('edit'),'','','systemicon'), array('item'=>$item->id));
+	$item->deletelink = $this->CreateLink($id, 'admin_delete_poll', $returnid, $admintheme->DisplayImage('icons/system/delete.gif', $this->Lang('delete'),'','','systemicon'), array('item'=>$item->id), $this->Lang('are_you_sure'));	
 }
 
 #---------------------

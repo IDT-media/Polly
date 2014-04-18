@@ -56,6 +56,12 @@ $sqlarray = $dict->DropTableSQL(POLLY_DB_TABLE_ANSWERS);
 $dict->ExecuteSQLArray($sqlarray);
 
 #---------------------
+# Templates
+#---------------------	
+
+$this->DeleteTemplate();
+
+#---------------------
 # Preferences
 #---------------------
 

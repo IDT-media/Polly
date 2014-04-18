@@ -85,6 +85,18 @@ $sqlarray = $dict->CreateTableSQL(POLLY_DB_TABLE_ANSWERS, $flds, $taboptarray);
 $dict->ExecuteSQLArray($sqlarray);
 
 #---------------------
+# Templates
+#---------------------	
+	
+// Form templates
+$fn = cms_join_path($this->GetModulePath(), 'templates', 'samples', 'form_default.tpl');
+if( file_exists( $fn ) ) {
+    $template = @file_get_contents($fn);
+	$this->SetTemplate('form_default', $template);
+	$this->SetPreference('template_default_form', 'default');
+}
+
+#---------------------
 # Preferences
 #---------------------
 

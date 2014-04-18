@@ -99,5 +99,40 @@ class ModuleExtensions
 		return $output;
 	}
 	
+	#---------------------
+	# Template methods
+	#--------------------- 
+	
+	public function GetFileTemplatesByType(&$mod, $type, $dir = false)
+	{
+		if(!$dir)
+			$dir = cms_join_path($mod->GetModulePath(), 'templates', 'samples');
+	
+		$result = array();
+		
+		if ($handle = opendir($dir)) {
+		
+			while (false !== ($entry = readdir($handle))) {
+			
+				if ($entry == "." || $entry == "..") continue;
+				
+				list($tpl_type, $tpl_name) = explode('_', $entry, 2);
+				if($tpl_type == $type) {
+				
+					$split_file = explode('.', $entry);
+					$split_name = explode('.', $tpl_name);
+					
+					$result[$split_name[0]] = $split_file[0];
+				}
+			}
+			
+			closedir($handle);
+		}		
+	
+		ksort($result);
+	
+		return $result;
+	}	
+	
 } // end of class
 ?>
